@@ -49,6 +49,11 @@
 
                 this.x += this.VX;
                 this.y += this.VY;
+                
+                if(this.y > canvas.height + 100) {
+                    var i = particles.indexOf(this);
+                    if(i != -1) particles.splice(i, 1);
+                }
             };
             
 		    this.draw = function(){
@@ -77,7 +82,7 @@
                     rndFloat(5, 30), 
                     rndFloat(0, 180), 
                     color, 
-                    5 * rndFloat(-1, 1),
+                    8 * rndFloat(-1, 1),
                     rndFloat(-40, 0),
                     rndFloat(0.01, 0.1)
                 ));
@@ -107,7 +112,7 @@
         window.onload = function(){
             setInterval(update, 1000/frameRate);
 
-            document.body.addEventListener('click',function(e){
+            document.body.addEventListener('touchstart',function(e){
                 makeBoom(e.pageX, e.pageY);
             });
         }
